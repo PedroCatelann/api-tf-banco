@@ -1,0 +1,36 @@
+<configuration>
+    <contextName>api-tf-banco</contextName>
+
+    <appender name="STDOUT" class="arch.logging.logback.console.ConsoleAppender">
+        <encoder class="arch.logging.logback.console.encoder.EnvConsoleEncoder"/>
+    </appender>
+
+    <appender name="STDOUT-DEV" class="arch.logging.logback.console.ConsoleAppender">
+        <encoder class="arch.logging.logback.console.encoder.DevConsoleEncoder"/>
+    </appender>
+
+    <appender name="FILE-MONITOR-LOGS" class="arch.logging.logback.file.RollingFileAppender">
+        <file>./logs/${hostname}-${CONTEXT_NAME}-monitor.log</file>
+        <rollingPolicy class="arch.logging.logback.file.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>./logs/${hostname}_%d{yyyy-MM-dd}_%i-${CONTEXT_NAME}-monitor.log</fileNamePattern>
+            <maxHistory>1</maxHistory>
+            <maxFileSize>10MB</maxFileSize>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="arch.logging.logback.console.encoder.EnvConsoleEncoder"/>
+    </appender>
+
+    <if condition='property("ARCH_ENVIRONMENTS").contains("dev")'>
+        <then>
+            <root level="INFO">
+                <appender-ref ref="STDOUT-DEV"/>
+            </root>
+        </then>
+        <else>
+            <root level="INFO">
+                <appender-ref ref="STDOUT"/>
+            </root>
+        </else>
+    </if>
+
+</configuration>

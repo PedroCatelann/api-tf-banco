@@ -1,0 +1,694 @@
+
+<html lang="pt">
+<head>
+    <meta charset="UTF-8" />
+    <title>api-tf-banco | Autbank Projetos e Consultoria Ltda.</title>
+    <style>
+        body, table {
+            margin: 0;
+            font-family: Tahoma, sans-serif;
+            font-size: 14px;
+            word-wrap: break-word;
+        }
+
+        header {
+            box-shadow: 0 .125rem .25rem rgba(0,0,0,.175) !important;
+            background: #ff0404;
+            position: relative;
+            padding: 1.0rem;
+        }
+
+        code {
+            padding: 0.17rem;
+            border-radius: 0.11rem;
+            font-family: monospace;
+            background-color: #ededeb;
+            color: #ed4a56
+        }
+
+        main {
+            display: block;
+        }
+
+        .container {
+            padding-right: 20px;
+            padding-left: 20px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .banner {
+            padding: 0.2rem;
+            margin-bottom: 0.7rem;
+            border-radius: 0 0 0.4rem 0.4rem;
+        }
+
+        .container ul {
+            margin-top: 0.5rem;
+            margin-bottom: 1.0rem;
+        }
+
+        .container ol {
+            list-style: none;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            margin-left: 0;
+            padding-left: 1.5rem;
+        }
+
+        .container li {
+            margin-bottom: 0.5rem;
+        }
+
+        .container table {
+            margin-bottom: 0.5rem;
+            border: 1px solid gray;
+            border-collapse: collapse;
+        }
+
+        .container thead {
+            text-align: left;
+        }
+
+        .container tr th {
+            font-weight: 600;
+            padding: 0.5rem;
+            vertical-align: top;
+            border: 1px solid gray;
+        }
+
+        .container tbody {
+            background-color: #fff;
+        }
+
+        .container tr td {
+            word-break:break-all;
+            padding: 0.5rem;
+            vertical-align: top;
+            border: 1px solid gray;
+        }
+
+        @page {
+            margin: 25px 15px;
+
+            @bottom-center {
+                content: counter(page) " / " counter(pages);
+            }
+        }
+
+        @media print {
+            .container table {
+                -fs-table-paginate: paginate;
+            }
+
+            .content .environments {
+                font-size: 0.65rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <img src="data:image/png;base64,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" />
+</header>
+<main>
+    <div class="container">
+        <div class="banner">
+            <h1>api-tf-banco</h1>
+            <p>Aqui você descreve tudo sobre a sua aplicação</p>
+        </div>
+
+        <div>
+            <h2>Índice</h2>
+            <div class="content">
+                <ul>
+                    
+                    <li><a href="#integracoes">Integrações</a>
+                        <ul>
+                            
+                            <li><a href="#sistemas">Sistemas</a></li>
+                        </ul>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    <li><a href="#preReqsGlobais">Pré-requisitos: Globais</a></li>
+                    
+                    
+                        <li><a href="#preReqsServicos">Pré-requisitos: Serviços</a></li>
+                    
+                    
+                        <li><a href="#environments">Variáveis de Ambiente</a></li>
+                    
+
+                    
+                </ul>
+            </div>
+        </div>
+
+        <hr/>
+
+        
+<div id="integracoes">
+    <h2>Integrações</h2>
+    
+    
+    <div id="sistemas" class="content">
+        <h3>Sistemas:</h3>
+        <table>
+            <thead>
+            <tr>
+                <th style="width: 20%">Nome da aplicação</th>
+                <th style="width: 10%">Sigla</th>
+                <th style="width: 30%">Descrição</th>
+                <th style="width: 25%">Tipo(s) de comunicação</th>
+                <th style="width: 15%">Opcional</th>
+            </tr>
+            </thead>
+            <tbody>
+            
+                <tr>
+                    <td>sistema-integracao-um</td>
+                    <td>S1</td>
+                    <td></td>
+                    <td>Kafka</td>
+                    <td>Não</td>
+                </tr>
+            
+                <tr>
+                    <td>sistema-integracao-dois</td>
+                    <td>S2</td>
+                    <td></td>
+                    <td>REST, SOAP</td>
+                    <td>Sim</td>
+                </tr>
+            
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+
+
+        
+        
+        
+        
+<div id="preReqsGlobais">
+    <h2>Pré-requisitos: Globais</h2>
+    <div class="content">
+        <ul>
+            
+            <li>É necessário ter a tabela <code>TABELA_UM</code> criada e populada.</li>
+            
+            <li>É necessário ter a tabela <code>TABELA_DOIS</code> criada.</li>
+            
+        </ul>
+    </div>
+</div>
+
+
+        
+<div id="preReqsServicos">
+    <h2>Pré-requisitos: Serviços</h2>
+    <div class="content">
+        <ul>
+            
+                <li>
+                    /endpoint-um GET
+                    <ul>
+                        
+                            <li>
+                                Variaveis:
+                                
+                                    <ul>
+                                        <li>VARIAVEL_DO_GET</li>
+                                    </ul>
+                                
+                                    <ul>
+                                        <li>VARIAVEL_CONDICAO_DO_GET</li>
+                                    </ul>
+                                
+                            </li>
+                            <li>
+                                Tabelas:
+                                
+                                    <ul>
+                                        <li>Para utilizar esse endpoint, é necessário ter a tabela <code>TABELA_DO_GET</code> criada e populada no banco.</li>
+                                    </ul>
+                                
+                                    <ul>
+                                        <li>Aqui você pode especificar tabelas que são necessárias para subir a API.</li>
+                                    </ul>
+                                
+                            </li>
+                            <li>
+                                Sistemas:
+                                
+                                    <ul>
+                                        <li>SISTEMA_B
+                                            <ul>
+                                                <li>
+                                                    Serviços:
+                                                    
+                                                        <ul>
+                                                            <li>servicoGetB: Serviço que traz os valores necessários do SISTEMA_B para esta API.</li>
+                                                        </ul>
+                                                    
+                                                        <ul>
+                                                            <li>nomeDoServiço: Descrição do serviço</li>
+                                                        </ul>
+                                                    
+                                                </li>
+                                                <li>
+                                                    Escopos:
+                                                    
+                                                        <ul>
+                                                            <li>S2_001_EXEMPLO_ESCOPO:POST</li>
+                                                        </ul>
+                                                    
+                                                </li>
+                                                <li>
+                                                    Condições:
+                                                    
+                                                        <ul>
+                                                            <li>Aqui você pode especificar algumas condições para que o endpoint funcione, por exemplo, ter um serviço de envio de SMS funcionando.</li>
+                                                        </ul>
+                                                    
+                                                </li>
+                                                <br />
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                
+                            </li>
+                        
+                    </ul>
+                </li>
+            
+        </ul>
+    </div>
+</div>
+
+        
+<div id="environments">
+    <h2>Variáveis de Ambiente</h2>
+    <p>As variáveis de ambiente que possuem um valor padrão (sem traço) não precisam ser informadas no deploy, exceto se o comportamento padrão da aplicação precise ser alterado para atender as demandas da instituição.<br>
+    - Será necessário atribuir um valor apenas aos campos que não apresentarem nenhum valor (exibido com traço na tabela abaixo no campo ARCH_OTLP_EXPORTER_URL).</p>
+    <div class="content">
+        
+<table class="environments">
+    <thead>
+    <tr>
+        <th style="width: 30%">Variável</th>
+        <th style="width: 20%">Padrão</th>
+        <th style="width: 50%">Descrição</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+    
+        
+            
+<tr>
+    <td>DEFAULT_CONTEXT_PATH</td>
+    <td>/</td>
+    <td>Configuração do prefixo de todos os endpoints.</td>
+</tr>
+
+        
+    
+    
+    
+        
+            
+<tr>
+    <td>SERVER_PORT</td>
+    <td>8080</td>
+    <td>Porta do servidor de aplicação.</td>
+</tr>
+
+        
+    
+    
+    
+        
+            
+<tr>
+    <td>MANAGEMENT_CONTEXT_PATH</td>
+    <td>/</td>
+    <td>Configuração do prefixo de todos os endpoints do management (usado para health check, metricas, infos, etc.).</td>
+</tr>
+
+        
+    
+    
+    
+        
+            
+<tr>
+    <td>MANAGEMENT_PORT</td>
+    <td>9090</td>
+    <td>Porta do endpoint de management.</td>
+</tr>
+
+        
+    
+    
+    
+        
+            
+<tr>
+    <td>HEALTH_LIVENESS</td>
+    <td>ping</td>
+    <td>Lista de indicadores para serem mostrados no liveness.</td>
+</tr>
+
+        
+    
+    
+    
+        
+            
+<tr>
+    <td>HEALTH_READINESS</td>
+    <td>ping,db</td>
+    <td>Lista de indicadores para serem mostrados no readiness.</td>
+</tr>
+
+        
+    
+    
+    
+        
+            
+<tr>
+    <td>CORS_ALLOW_ORIGINS</td>
+    <td>*</td>
+    <td>Lista separa por vírgula de todas as origens permitidas, o wildcard (*) pode ser utilizado para permitir todas.</td>
+</tr>
+
+        
+    
+    
+    
+        
+            
+<tr>
+    <td>CORS_ALLOW_METHODS</td>
+    <td>POST, PUT, GET, OPTIONS, HEAD, DELETE, CONNECT, TRACE, PATCH</td>
+    <td>Lista separada por vírgula de todos os métodos HTTP permitidos.</td>
+</tr>
+
+        
+    
+    
+    
+        
+            
+<tr>
+    <td>CORS_CACHE_MAX_AGE</td>
+    <td>3600</td>
+    <td>Tempo total em segundos que será utilizado pelo navegador como cache dos headers relacionados ao CORS.</td>
+</tr>
+
+        
+    
+    
+    
+        
+            
+<tr>
+    <td>CORS_ALLOW_HEADERS</td>
+    <td>Authorization, Content-Type, Accept, X-Requested-With, remember-me</td>
+    <td>Lista separada por vírgula de todos os headers permitidos.</td>
+</tr>
+
+        
+    
+    
+    
+        
+            
+<tr>
+    <td>ARCH_APP_NAME</td>
+    <td>-</td>
+    <td>Configura o nome da aplicação que será apresentada na ferramenta de telemetria.</td>
+</tr>
+
+        
+    
+    
+    
+        
+            
+<tr>
+    <td>ARCH_OTLP_EXPORTER_URL</td>
+    <td>-</td>
+    <td>Configura a URL de envio de dados ao opentelemetry collector.</td>
+</tr>
+
+        
+    
+    
+    
+        
+            
+<tr>
+    <td>ARCH_OTLP_AUTHENTICATION_HEADER</td>
+    <td>api-key</td>
+    <td>Configura o nome do cabeçalho utilizado para enviar o token de autenticação.</td>
+</tr>
+
+        
+    
+    
+    
+        
+    
+    
+    
+        
+            
+<tr>
+    <td>ARCH_OTLP_EXPORTER_LOGGING_BRIDGE_ENABLED</td>
+    <td>false</td>
+    <td>Habilita ou desabilita a exportação dos traces para log, podendo ser definida como `true` ou `false`.</td>
+</tr>
+
+        
+    
+    
+    
+        
+            
+<tr>
+    <td>ARCH_OTLP_METRICS_EXPORTER_ENABLED</td>
+    <td>false</td>
+    <td>Habilita a exportação de métricas usando OpenTelemetry (suportado apenas pelo newrelic).</td>
+</tr>
+
+        
+    
+    
+    
+        
+            
+<tr>
+    <td>ARCH_MONITORING_EVENTS_EXPORTER_ENABLED</td>
+    <td>false</td>
+    <td>Habilita a exportação de eventos usando OpenTelemetry (suportado apenas pelo newrelic).</td>
+</tr>
+
+        
+    
+    
+    
+        
+            
+<tr>
+    <td>ARCH_MONITORING_TELEMETRY_PROVIDER</td>
+    <td>opentelemetry</td>
+    <td>Configura o provedor de métricas utilizado. Valores possiveis: <code>(opentelemetry, newrelic)</code></td>
+</tr>
+
+        
+    
+    
+    
+        
+            
+<tr>
+    <td>ARCH_MONITORING_TELEMETRY_SAMPLE</td>
+    <td>AlwaysOnSampler</td>
+    <td>Configura o Sampler utilizado para determinar a forma de vazão de traces suportado apenas pelo Opentelemetry. Valores possiveis: <code>(AlwaysOnSampler, AlwaysOffSampler, ParentBased, TraceIdRatioBased)</code></td>
+</tr>
+
+        
+    
+    
+    
+        
+            
+<tr>
+    <td>ARCH_MONITORING_TELEMETRY_SAMPLE_ARGS</td>
+    <td>1</td>
+    <td>Configura os argumentos passados ao Sampler, atualmente suporta apenas valores entre 0.0 e 1.0 (0 a 100%) e é utilizado apenas quando o tipo de Sampler for igual a TraceIdRatioBased.</td>
+</tr>
+
+        
+    
+    
+    
+        
+    
+    
+    
+        
+            
+<tr>
+    <td>SERVER_WORKER_THREADS</td>
+    <td>64</td>
+    <td>Quantidade de threads destinadas ao processamento de requisições http.</td>
+</tr>
+
+        
+    
+    
+    </tbody>
+</table>
+
+    </div>
+    <div class="content">
+        <h3>Protegidas</h3>
+        
+<table class="environments">
+    <thead>
+    <tr>
+        <th style="width: 30%">Variável</th>
+        <th style="width: 20%">Padrão</th>
+        <th style="width: 50%">Descrição</th>
+    </tr>
+    </thead>
+    <tbody>
+    
+    
+        
+    
+    
+    
+        
+    
+    
+    
+        
+    
+    
+    
+        
+    
+    
+    
+        
+    
+    
+    
+        
+    
+    
+    
+        
+    
+    
+    
+        
+    
+    
+    
+        
+    
+    
+    
+        
+    
+    
+    
+        
+    
+    
+    
+        
+    
+    
+    
+        
+    
+    
+    
+        
+            
+<tr>
+    <td>ARCH_OTLP_AUTHENTICATION_KEY</td>
+    <td>-</td>
+    <td>Configura o token de autenticação enviado na requisição para o collector.</td>
+</tr>
+
+        
+    
+    
+    
+        
+    
+    
+    
+        
+    
+    
+    
+        
+    
+    
+    
+        
+    
+    
+    
+        
+    
+    
+    
+        
+    
+    
+    
+        
+            
+<tr>
+    <td>NEW_RELIC_INSERT_KEY</td>
+    <td>-</td>
+    <td>Configura a chave de inserção do new relic.</td>
+</tr>
+
+        
+    
+    
+    
+        
+    
+    
+    </tbody>
+</table>
+
+    </div>
+</div>
+
+
+
+        
+
+    </div>
+</main>
+</body>

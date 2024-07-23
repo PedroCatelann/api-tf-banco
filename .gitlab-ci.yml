@@ -1,0 +1,21 @@
+# Doc http://docs.dev.autbank.net/pipelines-ci-cd/
+variables:
+  NOME_GRUPO: tf
+  NOME_PROJETO: api-tf-banco
+  NAMESPACE:  autbank-tf
+  HELM_VALUES_DESENV: ./kubernetes/values.yaml
+  SDK_GROUP_ID: br.com.autbank.sdk.client
+  SDK_ARTIFACT_ID: api-tf-banco-client
+  SDK_FRAMEWORK_VERSION: 4.16.0.autbank
+  ON_ERROR_MSG_CONTACT: "" # Altere para o nome do seu grupo no rocket para receber notificações 
+  JAVA_VERSION: "21"
+
+# Para habilitar os steps desejados basta alterar o valor para "true"
+  GENERATE_IMAGE_ENABLED: "false"
+  DEPLOY_DEV_ENABLED: "false"
+  GENERATE_SDK_ENABLED: "false"
+
+include:
+  - project: 'plataformas/pipelines/cicd'
+    ref: v2
+    file: 'templates/java/jit/.gitlab-ci.yml'

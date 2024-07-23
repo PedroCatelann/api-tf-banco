@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8" />
+    <title>Catalogo API | Autbank Projetos e Consultoria Ltda.</title>
+    <style>
+        body, table {
+            margin: 0;
+            font-family: Tahoma, sans-serif;
+            font-size: 14px;
+        }
+
+        header {
+            box-shadow: 0 .125rem .25rem rgba(0,0,0,.175) !important;
+            background: #ff0404;
+            position: relative;
+            padding: 1.0rem;
+        }
+
+        code {
+            padding: 0.17rem;
+            border-radius: 0.11rem;
+            font-family: monospace;
+            background-color: #ededeb;
+            color: #ed4a56
+        }
+
+        main {
+            display: block;
+        }
+
+        .container {
+            width: 90%;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+
+        .content .bold {
+            font-weight: 700;
+        }
+
+        .banner {
+            padding: 0.2rem;
+            margin-bottom: 0.7rem;
+            border-radius: 0 0 0.4rem 0.4rem;
+        }
+
+        .banner h1 {
+            font-weight: 700 !important;
+            font-size: 2.0rem;
+        }
+
+        .banner p {
+            margin-top: 0.5rem;
+            font-size: 1rem !important;
+        }
+
+        .container h2 {
+            font-size: 1.33rem !important;
+            font-weight: 700 !important;
+        }
+
+        .container h3 {
+            font-size: 1.11rem !important;
+            font-weight: 600 !important;
+            margin-bottom: 0.9rem;
+        }
+
+        .container ul {
+            margin-top: 0.5rem;
+            margin-bottom: 1.0rem;
+        }
+
+        .container ol {
+            list-style: none;
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            margin-left: 0;
+            padding-left: 1.5rem;
+        }
+
+        .container li {
+            margin-bottom: 0.5rem;
+        }
+
+        .container table {
+            margin-bottom: 0.5rem;
+            border: 1px solid gray;
+            border-collapse: collapse;
+        }
+
+        .container thead {
+            text-align: left;
+        }
+
+        .container tr th {
+            font-weight: 600;
+            padding: 0.5rem;
+            vertical-align: top;
+            border: 1px solid gray;
+        }
+
+        .container tbody {
+            background-color: #fff;
+        }
+
+        .container tr td {
+            word-break: break-all;
+            padding: 0.5rem;
+            vertical-align: top;
+            border: 1px solid gray;
+        }
+
+        @page {
+            margin: 25px 15px;
+
+            @bottom-center {
+                content: counter(page) " / " counter(pages);
+            }
+        }
+
+        @media print {
+            .content table {
+                -fs-table-paginate: paginate;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <img src="data:image/png;base64,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" />
+</header>
+<main>
+    <div class="container">
+        <div class="banner">
+            <h1>API Banco</h1>
+            <p>API do banco</p>
+        </div>
+        <div id="paths">
+            <h2>Paths: </h2>
+            <div class="content">
+                
+                    <table style="margin-bottom: 2.0rem;">
+    <tbody>
+    <tr>
+        <td colspan="4" class="bold">
+            Serviço
+        </td>
+        <td colspan="5" class="highlight">
+            envioExterior
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4" class="bold">
+            Endpoint
+        </td>
+        <td colspan="5">
+            /secured/envios-exterior POST
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4" class="bold">
+            Escopos de Segurança
+        </td>
+        <td colspan="5">
+            
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4" class="bold">
+            Descrição
+        </td>
+        <td colspan="5">
+            Realiza cadastro de operação de envio ao exterior
+        </td>
+    </tr>
+    
+    
+</table>
+                
+            </div>
+        </div>
+        
+
+        <div id="schemas">
+            <h2>Schemas: </h2>
+            <div class="content">
+                
+                    <h3 id="InformacoesEnvioExterior">InformacoesEnvioExterior </h3>
+<table style="margin-bottom: 2.0rem;">
+    <tbody>
+        <tr>
+            <td colspan="2" class="bold">
+                Tipo
+            </td>
+            <td colspan="3" class="bold">
+                Nome
+            </td>
+            <td colspan="4" class="bold">
+                Descrição
+            </td>
+        </tr>
+        
+        <tr>
+            <td colspan="2">
+                integer
+            </td>
+            <td colspan="3">
+                idRemessa
+            </td>
+            <td colspan="4">
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td colspan="2">
+                number
+            </td>
+            <td colspan="3">
+                valor
+            </td>
+            <td colspan="4">
+                
+            </td>
+        </tr>
+        
+        <tr>
+            <td colspan="2">
+                string
+            </td>
+            <td colspan="3">
+                status
+            </td>
+            <td colspan="4">
+                
+            </td>
+        </tr>
+        
+    </tbody>
+</table>
+                
+            </div>
+        </div>
+        
+    </div>
+</main>
+</body>
+</html>

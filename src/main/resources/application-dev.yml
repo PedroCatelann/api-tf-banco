@@ -1,0 +1,8 @@
+arch:
+  security.jwt.algorithm: RS256
+micronaut:
+  server:
+    port: 8080
+management:
+  port: "9090"
+

@@ -1,0 +1,57 @@
+openapi: 3.0.1
+
+info:
+  title: API Banco
+  description: API do banco
+  version: 0.0.1
+  contact:
+    name: "Autbank"
+    url: "http://www.autbank.com.br/"
+    email: "contato@autbank.com.br"
+
+servers:
+  - url: /
+
+paths:
+  /secured/envios-exterior:
+    post:
+      summary: Realiza cadastro de operação de envio ao exterior
+      description: Realiza cadastro de operação de envio ao exterior
+      operationId: envioExterior
+      security:
+        - microservice_auth:
+            - TF_001_ENVIOSEXTERIOR:POST
+      requestBody:
+        description: Dados necessários para envio ao exterior
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InformacoesEnvioExterior'
+
+      responses:
+        200:
+          description: Informações de Envio Exterior incluído com sucesso
+
+components:
+  schemas:
+    InformacoesEnvioExterior:
+      type: object
+      properties:
+        idRemessa:
+          type: integer
+        valor:
+          type: number
+        status:
+          type: string
+
+  securitySchemes:
+    microservice_auth:
+      type: "oauth2"
+      flows:
+        clientCredentials:
+          tokenUrl: "/proxy/oauth/token"
+          scopes:
+            TF_001_ENVIOSEXTERIOR:POST: "Permissão para inserir envio exterior"
+            TF_001_ENVIOSEXTERIOR:PATCH: "Permissão para editar envio exterior"
+            TF_002_SENDMONEY:POST: "Permissão para enviar dinheiro"

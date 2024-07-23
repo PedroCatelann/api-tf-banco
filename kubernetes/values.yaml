@@ -1,0 +1,12 @@
+appName: api-tf-banco
+archetype: micronaut
+
+image:
+  repository: registry.autbank.net/tf/api-tf-banco
+
+env: |
+  - name: JAVA_OPTS
+    value: "-Xms64m"
+
+extensions:
+  opentelemetry:

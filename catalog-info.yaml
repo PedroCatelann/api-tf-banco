@@ -1,0 +1,58 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: api-tf-banco
+  description: Aqui você descreve tudo sobre a sua aplicação
+  annotations:
+    backstage.io/kubernetes-namespace: autbank-tf
+    backstage.io/kubernetes-label-selector: 'app.name=api-tf-banco'
+    sonarqube.org/project-key: br.com.autbank:api-tf-banco
+  tags:
+    - java
+  links:
+    - url: http://api-tf-banco.tf.dev.mesh.autbank.net
+      title: Istio HTTP
+    - url: https://api-tf-banco.tf.dev.mesh.autbank.net
+      title: Istio HTTPs
+    - url: http://grafana.dev.autbank.net/d/pyHxqcM4z/arch-stats?orgId=1&refresh=30s&var-namespace=autbank-tf&var-job=api-tf-banco
+      title: Grafana Monitoring
+      type: dashboard
+    - url: https://rancher.autbank.net/dashboard/c/local/explorer/apps.deployment/autbank-tf/api-tf-banco#pods
+      title: Rancher
+      type: dashboard
+    - url: http://docs.dev.autbank.net/arch-java/
+      title: Framework Documentation
+      type: documentation
+    - url: http://jaeger.dev.autbank.net/search?service=api-tf-banco&limit=20
+      title: Jaeger
+spec:
+  type: service
+  owner: autbank-tf
+  lifecycle: stable
+  system: autbank-tf
+  providesApis:
+    - api-tf-banco-openapi
+  
+---
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: api-tf-banco-openapi
+  description: Swagger documentation for api-tf-banco service.
+  tags:
+    - openapi3
+spec:
+  type: openapi
+  owner: autbank-tf
+  system: autbank-tf
+  lifecycle: stable
+  definition:
+    $text: ./src/main/resources/swagger.yaml
+
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: autbank-tf
+spec:
+  owner: autbank-tf

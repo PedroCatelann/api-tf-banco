@@ -1,0 +1,5 @@
+vault:
+  server: 'http://vault.autbank.net'
+  authentication: 'token'
+  token: 's.S1iqDHoxqSjAu459obgCEHe1'
+

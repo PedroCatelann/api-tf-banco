@@ -1,0 +1,40 @@
+app:
+  nome: api-tf-banco
+  descricao: Aqui você descreve tudo sobre a sua aplicação
+  siglaSistema: tf
+  namespace: autbank-tf
+  integracoes:
+    infraestrutura:
+    sistemas:
+      - nomeAplicacao: sistema-integracao-um
+        sigla: S1
+        protocolos:
+          - Kafka
+      - nomeAplicacao: sistema-integracao-dois
+        sigla: S2
+        opcional: true # opcional
+        protocolos:
+          - REST
+          - SOAP
+  preReqsGlobais:
+    condicoesBanco:
+      - 'É necessário ter a tabela <code>TABELA_UM</code> criada e populada.'
+      - 'É necessário ter a tabela <code>TABELA_DOIS</code> criada.'
+  preReqsServicos:
+    - endpoint: '/endpoint-um GET'
+      detalhes:
+        variaveis:
+          - VARIAVEL_DO_GET
+          - VARIAVEL_CONDICAO_DO_GET
+        tabelas:
+          - Para utilizar esse endpoint, é necessário ter a tabela <code>TABELA_DO_GET</code> criada e populada no banco.
+          - Aqui você pode especificar tabelas que são necessárias para subir a API.
+        sistemas:
+          - nomeSistema: 'SISTEMA_B'
+            servicos:
+              - 'servicoGetB: Serviço que traz os valores necessários do SISTEMA_B para esta API.'
+              - 'nomeDoServiço: Descrição do serviço'
+            escopos:
+              - 'S2_001_EXEMPLO_ESCOPO:POST'
+            condicoes:
+              - 'Aqui você pode especificar algumas condições para que o endpoint funcione, por exemplo, ter um serviço de envio de SMS funcionando.'

@@ -1,0 +1,5 @@
+projectName: api-tf-banco
+languageVersion: "21"
+runtime: micronaut
+groupId: br.com.autbank
+template: arch

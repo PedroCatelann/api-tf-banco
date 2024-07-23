@@ -1,0 +1,13 @@
+arch:
+  app.name: api-tf-banco
+
+ds.default:
+  url: "jdbc:sqlserver://CATELAN\\SQLEXPRESS;databaseName=TF_BANCO;sendStringParametersAsUnicode=false;encrypt=false;"
+  user: "sa"
+  password: "1234"
+
+micronaut:
+  server:
+    port: 8080
+management:
+  port: "9090"

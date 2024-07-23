@@ -1,0 +1,5 @@
+secrets:
+  paths: 'oauth2' #Substitua pelos paths utilizados por sua aplicação
+  root.path: 'secret/autbank/sistema/tf'
+
+
