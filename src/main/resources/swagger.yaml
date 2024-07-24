@@ -33,8 +33,39 @@ paths:
         200:
           description: Informações de Envio Exterior incluído com sucesso
 
+  /transferencias:
+    post:
+      summary: Realiza a transferencia
+      description: Realiza a transferencia
+      operationId: realizaTransferencia
+      requestBody:
+        description: Dados necessários para transferencia
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InformacoesTransferencia'
+      responses:
+        200:
+          description: Informações de transferências incluídas com sucesso
+
 components:
   schemas:
+    InformacoesTransferencia:
+      type: object
+      properties:
+        idRemessa:
+          type: integer
+        valor:
+          type: number
+        titularDeb:
+          type: string
+        nroContaDeb:
+          type: string
+        titularCred:
+          type: string
+        nroContaCred:
+          type: string
     InformacoesEnvioExterior:
       type: object
       properties:

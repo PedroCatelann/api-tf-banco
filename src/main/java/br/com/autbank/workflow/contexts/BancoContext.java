@@ -11,4 +11,7 @@ import java.math.BigDecimal;
 @Setter
 public class BancoContext {
     BigDecimal valor;
+    Integer idRemessa;
+    Boolean clienteTemSaldo;
+    Boolean idRemessaExiste;
 }
