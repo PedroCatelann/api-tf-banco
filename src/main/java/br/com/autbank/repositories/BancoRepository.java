@@ -22,11 +22,16 @@ public class BancoRepository {
 
     private final String insertTransferenciasSQL;
 
+    private final String atualizaEnvioExteriorSQL;
+    private final String atualizaSaldoSQL;
+
     public BancoRepository(JdbcTemplate jdbcTemplate, Config config) {
         this.jdbcTemplate = jdbcTemplate;
         this.insertEnvioExteriorSQL = config.getValue("classpath:SQL/DML/INSERT_ENVIO_EXTERIOR.sql");
         this.selectContasSQL = config.getValue("classpath:SQL/DML/SELECT_CONTAS_BY_TITULAR_NROCONTA.sql");
         this.insertTransferenciasSQL = config.getValue("classpath:SQL/DML/INSERT_TRANSFERENCIAS.sql");
+        this.atualizaEnvioExteriorSQL = config.getValue("classpath:SQL/DML/UPDATE_ENVIO_EXTERIOR.sql");
+        this.atualizaSaldoSQL = config.getValue("classpath:SQL/DML/UPDATE_CONTA_SALDO.sql");
     }
 
     public void registraEnvioExterior(Integer idRemessa, BigDecimal valor, String status) {
@@ -35,6 +40,14 @@ public class BancoRepository {
 
     public void registraTransferencia(String nroContaCred, BigDecimal valor, Integer idRemessa) {
         jdbcTemplate.update(insertTransferenciasSQL, nroContaCred, valor, idRemessa);
+    }
+
+    public void atualizaStatusEnvioExterior(Integer idRemessa) {
+        jdbcTemplate.update(atualizaEnvioExteriorSQL, idRemessa);
+    }
+
+    public void atualizaSaldo(BigDecimal saldo, String titular, String nroConta) {
+        jdbcTemplate.update(atualizaSaldoSQL, saldo, titular, nroConta);
     }
 
     public Contas buscaContas(String titular, String nroConta) {

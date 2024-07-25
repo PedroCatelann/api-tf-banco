@@ -24,7 +24,8 @@ public class BancoFlowProcessorFactory {
     private InformaErroIdRemessaFlowitem informaErroIdRemessaFlowitem;
     private BuscaSaldoClienteFlowItem buscaSaldoClienteFlowItem;
     private BuscaRemessaFlowItem buscaRemessaFlowItem;
-
+    private SimulaKafkaFlowItem simulaKafkaFlowItem;
+    private AlteraStatusEnvioExteriorFlowItem alteraStatusEnvioExteriorFlowItem;
     @Bean
     @Singleton
     public FlowProcessor<InformacoesEnvioExterior, BancoContext, Void> insereEnvioExterior() {
@@ -43,7 +44,8 @@ public class BancoFlowProcessorFactory {
                             ifTrue(insereTransferenciaFlowItem),
                             ifFalse(informaErroIdRemessaFlowitem)
                         )
-
+                .step(simulaKafkaFlowItem)
+                .step(alteraStatusEnvioExteriorFlowItem)
                 .build();
     }
 }

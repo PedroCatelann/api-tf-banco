@@ -27,14 +27,21 @@ public class BuscaSaldoClienteFlowItem extends FlowItem<InformacoesTransferencia
 
     public boolean validaSaldo(InformacoesTransferencia informacoesTransferencia, BancoContext bancoContext) {
 
-        var conta = bancoRepository.buscaContas(informacoesTransferencia.getTitularDeb(), informacoesTransferencia.getNroContaDeb());
+        var contaDeb = bancoRepository.buscaContas(informacoesTransferencia.getTitularDeb(), informacoesTransferencia.getNroContaDeb());
+        var contaCred = bancoRepository.buscaContas(informacoesTransferencia.getTitularCred(), informacoesTransferencia.getNroContaCred());
 
-        bancoContext.setIdRemessa(informacoesTransferencia.getIdRemessa());
-
-        if (conta.getSaldo().subtract(informacoesTransferencia.getValor()).compareTo(BigDecimal.ZERO) < 0) {
+        if(contaDeb == null || contaCred == null ) {
+            log.error("CONTA DE CRÉDITO OU DÉBITO INFORMADA NÃO EXISTEM");
+            return false;
+        }
+        if (contaDeb.getSaldo().subtract(informacoesTransferencia.getValor()).compareTo(BigDecimal.ZERO) < 0) {
             log.error("NÃO HÁ SALDO SUFICIENTE NA CONTA");
             return false;
         }
+
+        bancoContext.setContaCredSaldo(contaCred.getSaldo());
+        bancoContext.setContaDebSaldo(contaDeb.getSaldo());
+        bancoContext.setIdRemessa(informacoesTransferencia.getIdRemessa());
 
         return true;
     }
