@@ -3,6 +3,7 @@ package br.com.autbank.schedullers;
 import arch.runtime.annotation.bridge.scheduling.TaskScheduler;
 import br.com.autbank.model.EnviosExterior;
 import br.com.autbank.repositories.BancoRepository;
+import br.com.autbank.workflow.contexts.BancoContext;
 import jakarta.inject.Named;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,11 +14,11 @@ import lombok.extern.slf4j.Slf4j;
 public class SchedullerStatusLiberadoEnvioExterior {
 
     private BancoRepository bancoRepository;
-
-    @TaskScheduler(cron = "0 13 15 * * *")
+    @TaskScheduler(cron = "0 35 16 * * *")
     public void buscaStatusLiberado() {
 
         log.info("EXIBINDO EXEC AGENDADA");
+
         log.info("PROCURANDO POR STATUS LIBERADO");
         var envios = bancoRepository.findByStatusLiberado();
         for (EnviosExterior envio : envios) {

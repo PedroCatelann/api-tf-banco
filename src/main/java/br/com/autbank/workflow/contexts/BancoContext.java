@@ -14,7 +14,7 @@ public class BancoContext {
     Integer idRemessa;
     Boolean clienteTemSaldo;
     Boolean idRemessaExiste;
-
+    BigDecimal cotacaoDolar;
 
     BigDecimal informacoesTransferenciaValor;
 

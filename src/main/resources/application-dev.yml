@@ -1,3 +1,6 @@
+ds.default:
+  url: "jdbc:sqlserver://CATELAN\\SQLEXPRESS;databaseName=TF_BANCO;sendStringParametersAsUnicode=false;encrypt=false;"
+
 arch:
   security.jwt.algorithm: RS256
 micronaut:
