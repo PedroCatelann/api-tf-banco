@@ -13,7 +13,7 @@ public class SchedullerStatusLiberadoEnvioExterior {
 
     private BancoRepository bancoRepository;
 
-    @TaskScheduler(cron = "0 29 11 * * *")
+    @TaskScheduler(cron = "0 24 14 * * *")
     public void buscaStatusLiberado() {
 
         log.info("EXIBINDO EXEC AGENDADA");
