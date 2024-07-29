@@ -14,6 +14,16 @@ public class BancoContext {
     Integer idRemessa;
     Boolean clienteTemSaldo;
     Boolean idRemessaExiste;
+
+
+    BigDecimal informacoesTransferenciaValor;
+
     BigDecimal contaCredSaldo;
+    String informacoesTransferenciaTitularCred;
+    String informacoesTransferenciaContaCred;
+
     BigDecimal contaDebSaldo;
+    String informacoesTransferenciaTitularDeb;
+    String informacoesTransferenciaContaDeb;
+
 }

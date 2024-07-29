@@ -17,8 +17,14 @@ public class InsereTransferenciaFlowItem extends FlowItem<InformacoesTransferenc
     @Override
     protected Void doExecute(InformacoesTransferencia informacoesTransferencia, BancoContext bancoContext) throws Exception {
 
-        bancoRepository.atualizaSaldo(bancoContext.getContaDebSaldo().subtract(informacoesTransferencia.getValor()), informacoesTransferencia.getTitularDeb(), informacoesTransferencia.getNroContaDeb());
-        bancoRepository.atualizaSaldo(bancoContext.getContaCredSaldo().add(informacoesTransferencia.getValor()), informacoesTransferencia.getTitularCred(), informacoesTransferencia.getNroContaCred());
+        bancoContext.setInformacoesTransferenciaValor(informacoesTransferencia.getValor());
+
+        bancoContext.setInformacoesTransferenciaTitularCred(informacoesTransferencia.getTitularCred());
+        bancoContext.setInformacoesTransferenciaContaCred(informacoesTransferencia.getNroContaCred());
+
+        bancoContext.setInformacoesTransferenciaTitularDeb(informacoesTransferencia.getTitularDeb());
+        bancoContext.setInformacoesTransferenciaContaDeb(informacoesTransferencia.getNroContaDeb());
+
         bancoRepository.registraTransferencia(informacoesTransferencia.getNroContaDeb(), informacoesTransferencia.getValor(), informacoesTransferencia.getIdRemessa());
         return null;
     }

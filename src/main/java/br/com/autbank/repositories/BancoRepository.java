@@ -46,8 +46,8 @@ public class BancoRepository {
         jdbcTemplate.update(insertTransferenciasSQL, nroContaCred, valor, idRemessa);
     }
 
-    public void atualizaStatusEnvioExterior(Integer idRemessa) {
-        jdbcTemplate.update(atualizaEnvioExteriorSQL, idRemessa);
+    public void atualizaStatusEnvioExterior(String status, Integer idRemessa) {
+        jdbcTemplate.update(atualizaEnvioExteriorSQL, status, idRemessa);
     }
 
     public void atualizaSaldo(BigDecimal saldo, String titular, String nroConta) {

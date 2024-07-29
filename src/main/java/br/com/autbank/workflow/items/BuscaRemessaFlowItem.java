@@ -37,6 +37,7 @@ public class BuscaRemessaFlowItem extends FlowItem<InformacoesTransferencia, Ban
         if(response.statusCode() == 200) {
             log.info("ID REMESSA ENCONTRADO, SEGUINDO COM O PROCESSO");
             bancoContext.setIdRemessaExiste(true);
+
             return informacoesTransferencia;
         }
 

@@ -14,7 +14,10 @@ public class AlteraStatusEnvioExteriorFlowItem extends FlowItem<Void, BancoConte
 
     @Override
     protected Void doExecute(Void unused, BancoContext bancoContext) throws Exception {
-        bancoRepository.atualizaStatusEnvioExterior(bancoContext.getIdRemessa());
+
+        bancoRepository.atualizaStatusEnvioExterior("LIBERADO", bancoContext.getIdRemessa());
+        bancoRepository.atualizaSaldo(bancoContext.getContaDebSaldo().subtract(bancoContext.getInformacoesTransferenciaValor()), bancoContext.getInformacoesTransferenciaTitularDeb(), bancoContext.getInformacoesTransferenciaContaDeb());
+        bancoRepository.atualizaSaldo(bancoContext.getContaCredSaldo().add(bancoContext.getInformacoesTransferenciaValor()), bancoContext.getInformacoesTransferenciaTitularCred(), bancoContext.getInformacoesTransferenciaContaCred());
         return null;
     }
 }
