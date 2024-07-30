@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 public class SchedullerStatusLiberadoEnvioExterior {
 
     private BancoRepository bancoRepository;
-    @TaskScheduler(cron = "0 35 16 * * *")
+    @TaskScheduler(cron = "0 09 10 * * *")
     public void buscaStatusLiberado() {
 
         log.info("EXIBINDO EXEC AGENDADA");
